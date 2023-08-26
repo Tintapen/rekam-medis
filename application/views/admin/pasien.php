@@ -22,7 +22,7 @@
                         <thead>
                             <tr>
                                 <th width="10px">#</th>
-                                <th>No. MR</th>
+                                <th>No.RM</th>
                                 <th>Nama Pasien</th>
                                 <th>Tempat, Tanggal Lahir</th>
                                 <th>Alamat</th>
@@ -37,7 +37,7 @@
                             foreach ($pasien->result_array() as $row) : ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $row['nomr'] ?></td>
+                                    <td><?= $row['tb_pasien_id'] ?></td>
                                     <td><?= $row['nama'] ?></td>
                                     <td><?= $row['tempat_lahir'] . ", " . date("d-m-Y", strtotime($row['tgl_lahir'])) ?></td>
                                     <td><?= $row['alamat'] ?></td>
@@ -74,7 +74,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>No. Rekam Medis</label>
-                        <input type="text" name="nomr" class="form-control" placeholder="AUTO" disabled>
+                        <input type="text" name="tb_pasien_id" class="form-control" placeholder="AUTO" disabled>
                     </div>
                     <div class="form-group">
                         <label>Nama Pasien</label>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="form-group">
                         <label>No. Telp</label>
-                        <input type="text" name="notelp" class="form-control" placeholder="No Telp" required>
+                        <input type="number" name="notelp" class="form-control" placeholder="No Telp" required>
                     </div>
                     <div class="form-group">
                         <label>Riwayat Alergi Obat</label>
@@ -131,7 +131,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>No. Rekam Medis</label>
-                            <input type="text" name="nomr" class="form-control" value="<?= $edit->nomr ?>" disabled>
+                            <input type="text" name="nomr" class="form-control" value="<?= $edit->tb_pasien_id ?>" disabled>
                         </div>
                         <div class="form-group">
                             <label>Nama Pasien</label>
@@ -154,7 +154,7 @@
                         </div>
                         <div class="form-group">
                             <label>No. Telp</label>
-                            <input type="text" name="notelp" class="form-control" placeholder="No Telp" value="<?= $edit->notelp ?>" required>
+                            <input type="number" name="notelp" class="form-control" placeholder="No Telp" value="<?= $edit->notelp ?>" required>
                         </div>
                         <div class="form-group">
                             <label>Riwayat Alergi Obat</label>

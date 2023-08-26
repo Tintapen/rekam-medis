@@ -22,7 +22,9 @@
                         <thead>
                             <tr>
                                 <th width="10px">#</th>
+                                <th>No Induk Dokter</th>
                                 <th>Nama Dokter</th>
+                                <th>Hari Praktek</th>
                                 <th>Shift</th>
                                 <th>Aksi</th>
                             </tr>
@@ -33,7 +35,9 @@
                             foreach ($dokter->result_array() as $row) : ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
+                                    <td><?= $row['noinduk'] ?></td>
                                     <td><?= $row['nama'] ?></td>
+                                    <td><?= $row['haripraktek'] ?></td>
                                     <td><?= $row['shift'] ?></td>
                                     <td>
                                         <button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editData<?= $row['tb_dokter_id'] ?>" style="margin-bottom: 2px">
@@ -65,8 +69,16 @@
                 <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Nama Dokter</label>
+                        <label>No Induk Dokter</label>
+                        <input type="text" name="noinduk" class="form-control" placeholder="Nomor Induk Dokter Dokter" required>
+                    </div>
+                    <div class="form-group">
+                        <labe>Nama Dokter</labe>
                         <input type="text" name="nama" class="form-control" placeholder="Nama Dokter" required>
+                    </div>
+                    <div class="form-group">
+                        <labe>Hari Praktek </labe>
+                        <input type="text" name="haripraktek" class="form-control" placeholder="Hari Praktek Dokter" required>
                     </div>
                     <div class="form-group">
                         <label>Shift</label>
@@ -108,8 +120,16 @@
                     <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group">
+                            <label>No Induk Dokter</label>
+                            <input type="text" name="noinduk" class="form-control" placeholder="No Induk Dokter " value="<?= $edit->noinduk ?>" required>
+                        </div>
+                        <div class="form-group">
                             <label>Nama Dokter</label>
                             <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" value="<?= $edit->nama ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Hari Praktek Dokter</label>
+                            <input type="text" name="haripraktek" class="form-control" placeholder="hari Praktek " value="<?= $edit->haripraktek ?>" required>
                         </div>
                         <div class="form-group">
                             <label>Shift</label>

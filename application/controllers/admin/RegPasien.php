@@ -16,10 +16,8 @@ class RegPasien extends CI_Controller
     {
         $data['title']      = 'Registerasi Pasien';
         $data['subtitle']   = 'Semua data registerasi pasien akan ditampikan disini';
-
-        $this->db->order_by('nopendaftaran', 'ASC');
         $data['reg_pasien'] = $this->m_model->get_desc('tb_reg_pasien');
-        $this->db->order_by('nomr', 'ASC');
+        $this->db->order_by('tb_pasien_id', 'ASC');
         $data['pasien'] = $this->m_model->get_desc('tb_pasien')->result();
         $this->db->order_by('nama', 'ASC');
         $data['dokter'] = $this->m_model->get_desc('tb_dokter')->result();
@@ -34,24 +32,25 @@ class RegPasien extends CI_Controller
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $nomr           = $post['nomr'];
+        $tb_pasien_id           = $post['tb_pasien_id'];
         $nama           = $post['nama'];
         $alamat         = $post['alamat'];
         $tgl_lahir      = $post['tgl_lahir'];
         $dokter         = $post['dokter'];
         $shift          = $post['shift'];
         $terdaftar      = date('Y-m-d H:i:s');
+        $umur           = date('Y') - date('Y', strtotime($tgl_lahir));
 
         $data = [
+            'tb_reg_pasien_id'  => $this->getNomorRg(),
             'created'       => date('Y-m-d H:i:s'),
             'created_by'    => $this->session->userdata('id'),
             'updated'       => date('Y-m-d H:i:s'),
             'updated_by'    => $this->session->userdata('id'),
-            'nopendaftaran' => $this->getNomorPend(),
-            'nomr'          => $nomr,
+            'tb_pasien_id'          => $tb_pasien_id,
             'nama'          => $nama,
             'alamat'        => $alamat,
-            'tgl_lahir'     => $tgl_lahir,
+            'umur'     => $umur,
             'tb_dokter_id'  => $dokter,
             'jam_kerja'     => $shift,
             'terdaftar'     => $terdaftar
@@ -61,25 +60,40 @@ class RegPasien extends CI_Controller
         $this->session->set_flashdata('pesan', 'Data berhasil ditambahkan!');
         redirect('reg_pasien');
     }
+    private function getNomorRg()
+    {
+        $this->db->select('MAX(RIGHT(tb_reg_pasien_id,6)) as tb_reg_pasien_id');
+        $sql = $this->m_model->get_desc('tb_reg_pasien');
+
+        $code = "";
+        if ($sql->num_rows() > 0) {
+            foreach ($sql->result() as $row) {
+                $doc = ((int)$row->tb_reg_pasien_id + 1);
+                $code = date('ymd') . '' . sprintf("%06s", $doc);
+            }
+        } else {
+            $code = date('ymd') . '' . "000001";
+        }
+
+        return $code;
+    }
 
     public function update($id)
     {
         $post = $this->input->post(NULL, TRUE);
 
-        $nomr           = $post['nomr'];
+        $tb_pasien_id           = $post['tb_pasien_id'];
         $nama           = $post['nama'];
         $alamat         = $post['alamat'];
-        $tgl_lahir      = $post['tgl_lahir'];
         $dokter         = $post['dokter'];
         $shift          = $post['shift'];
 
         $data = [
             'updated'       => date('Y-m-d H:i:s'),
             'updated_by'    => $this->session->userdata('id'),
-            'nomr'          => $nomr,
+            'tb_pasien_id'          => $tb_pasien_id,
             'nama'          => $nama,
             'alamat'        => $alamat,
-            'tgl_lahir'     => $tgl_lahir,
             'tb_dokter_id'  => $dokter,
             'jam_kerja'     => $shift
         ];
@@ -98,23 +112,5 @@ class RegPasien extends CI_Controller
         $this->m_model->delete($where, 'tb_reg_pasien');
         $this->session->set_flashdata('pesan', 'Data berhasil dihapus!');
         redirect('reg_pasien');
-    }
-
-    private function getNomorPend()
-    {
-        $this->db->select('MAX(RIGHT(nopendaftaran,6)) as nopendaftaran');
-        $sql = $this->m_model->get_desc('tb_reg_pasien');
-
-        $code = "";
-        if ($sql->num_rows() > 0) {
-            foreach ($sql->result() as $row) {
-                $doc = ((int)$row->nopendaftaran + 1);
-                $code = sprintf("%06s", $doc);
-            }
-        } else {
-            $code = "000001";
-        }
-
-        return $code;
     }
 }

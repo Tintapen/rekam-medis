@@ -25,7 +25,7 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">Silahkan Input Username dan Password</p>
 
             <form action="<?= site_url('home/auth') ?>" method="post">
                 <div class="form-group has-feedback">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
                     </div>
                 </div>
             </form>

@@ -7,7 +7,7 @@ class Home extends CI_Controller
 {
     public function index()
     {
-        if ($this->session->userdata('level') == 'Administrator' or $this->session->userdata('level') == 'User') {
+        if ($this->session->userdata('level') == 'Administrator' or $this->session->userdata('level') == 'Dokter') {
             redirect('dashboard');
         } else {
             $data['title']  = 'Login';
@@ -17,7 +17,7 @@ class Home extends CI_Controller
 
     public function login()
     {
-        if ($this->session->userdata('level') == 'Administrator' or $this->session->userdata('level') == 'User') {
+        if ($this->session->userdata('level') == 'Administrator' or $this->session->userdata('level') == 'Dokter') {
             redirect('dashboard');
         } else {
             $data['title']  = 'Login';
@@ -33,7 +33,6 @@ class Home extends CI_Controller
         $password   = $cleanPost['password'];
 
         $where = array('username' => $username);
-
         $cek = $this->m_model->get_where($where, 'tb_user');
 
         if ($cek->num_rows() > 0) {

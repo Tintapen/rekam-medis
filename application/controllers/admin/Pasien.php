@@ -17,7 +17,7 @@ class Pasien extends CI_Controller
         $data['title']      = 'Data Pasien';
         $data['subtitle']   = 'Semua data pasien akan ditampikan disini';
 
-        $this->db->order_by('nomr', 'ASC');
+        $this->db->order_by('tb_pasien_id', 'ASC');
         $data['pasien'] = $this->m_model->get_desc('tb_pasien');
 
         $this->load->view('admin/templates/header', $data);
@@ -43,7 +43,7 @@ class Pasien extends CI_Controller
             'created_by'    => $this->session->userdata('id'),
             'updated'       => date('Y-m-d H:i:s'),
             'updated_by'    => $this->session->userdata('id'),
-            'nomr'          => $this->getNomorMr(),
+            'tb_pasien_id'         => $this->getNomorMr(),
             'nama'          => $nama,
             'tempat_lahir'  => $tempat_lahir,
             'tgl_lahir'     => $tgl_lahir,
@@ -98,13 +98,13 @@ class Pasien extends CI_Controller
 
     private function getNomorMr()
     {
-        $this->db->select('MAX(RIGHT(nomr,6)) as nomr');
+        $this->db->select('MAX(RIGHT(tb_pasien_id,6)) as tb_pasien_id');
         $sql = $this->m_model->get_desc('tb_pasien');
 
         $code = "";
         if ($sql->num_rows() > 0) {
             foreach ($sql->result() as $row) {
-                $doc = ((int)$row->nomr + 1);
+                $doc = ((int)$row->tb_pasien_id + 1);
                 $code = sprintf("%06s", $doc);
             }
         } else {
@@ -114,9 +114,9 @@ class Pasien extends CI_Controller
         return $code;
     }
 
-    public function getPasien($noMr)
+    public function getPasien($tb_pasien_id)
     {
-        $where['nomr'] = $noMr;
+        $where['tb_pasien_id'] = $tb_pasien_id;
         $data = $this->m_model->get_where($where, 'tb_pasien')->row();
         echo json_encode($data);
     }

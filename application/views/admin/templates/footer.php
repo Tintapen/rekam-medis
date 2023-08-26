@@ -669,7 +669,7 @@
   /**
    * Event change nomr pasien
    */
-  $("[name=nomr]").change(function(e) {
+  $("[name=tb_pasien_id]").change(function(e) {
     e.preventDefault();
     var value = this.value;
     var url = '<?= site_url("pasien/getPasien/") ?>' + value;

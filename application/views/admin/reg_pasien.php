@@ -22,11 +22,11 @@
                         <thead>
                             <tr>
                                 <th width="10px">#</th>
-                                <th>No. Pendaftaran</th>
+                                <th>No. Reg</th>
                                 <th>No. Rekam Medis</th>
                                 <th>Nama Pasien</th>
-                                <th>Alamat</th>
-                                <th>Tanggal Lahir</th>
+                                <th>Domisili</th>
+                                <th>Umur</th>
                                 <th>Dokter</th>
                                 <th>Jam Praktek</th>
                                 <th>Aksi</th>
@@ -42,11 +42,11 @@
                                 ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $row['nopendaftaran'] ?></td>
-                                    <td><?= $row['nomr'] ?></td>
+                                    <td><?= $row['tb_reg_pasien_id'] ?></td>
+                                    <td><?= $row['tb_pasien_id'] ?></td>
                                     <td><?= $row['nama'] ?></td>
                                     <td><?= $row['alamat'] ?></td>
-                                    <td><?= $row['tgl_lahir'] ?></td>
+                                    <td><?= $row['umur']; ?></td>
                                     <td><?= $dok->nama ?></td>
                                     <td><?= $row['jam_kerja'] ?></td>
                                     <td>
@@ -79,15 +79,11 @@
                 <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>" style="display: none">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>No. Pendaftaran</label>
-                        <input type="text" name="nopendaftaran" class="form-control" placeholder="AUTO" disabled>
-                    </div>
-                    <div class="form-group">
                         <label>No. Rekam Medis</label>
-                        <select class="form-control select2" name="nomr" style="width: 100%;" required>
+                        <select class="form-control select2" name="tb_pasien_id" style="width: 100%;" required>
                             <option value="">Select Status</option>
                             <?php foreach ($pasien as $val) : ?>
-                                <option value="<?= $val->nomr ?>"><?= $val->nomr ?></option>
+                                <option value="<?= $val->tb_pasien_id ?>"><?= $val->tb_pasien_id ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -96,12 +92,12 @@
                         <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" readonly>
                     </div>
                     <div class="form-group">
-                        <label>Alamat</label>
-                        <textarea class="form-control" name="alamat" rows="3" readonly></textarea>
+                        <label>Alamat Domisili</label>
+                        <textarea class="form-control" name="alamat" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Tanggal Lahir</label>
-                        <input type="date" name="tgl_lahir" class="form-control" placeholder="Tanggal lahir" readonly>
+                        <input type="date" name="tgl_lahir" class="form-control" placeholder="Taggal Lahir" readonly>
                     </div>
                     <div class="form-group">
                         <label>Dokter</label>
@@ -152,33 +148,20 @@
                     <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>" style="display: none">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>No. Pendaftaran</label>
-                            <input type="text" name="nopendaftaran" class="form-control" placeholder="AUTO" value="<?= $edit->nopendaftaran ?>" readonly>
-                        </div>
-                        <div class="form-group">
                             <label>No. Rekam Medis</label>
-                            <select class="form-control select2" name="nomr" style="width: 100%;" required>
-                                <option value="">Select Status</option>
-                                <?php foreach ($pasien as $val) : ?>
-                                    <?php if ($edit->nomr == $val->nomr) : ?>
-                                        <option value="<?= $val->nomr ?>" selected><?= $val->nomr ?></option>
-                                    <?php else : ?>
-                                        <option value="<?= $val->nomr ?>"><?= $val->nomr ?></option>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </select>
+                            <input type="text" name="tb_pasien_id" class="form-control" placeholder="AUTO" value="<?= $edit->tb_pasien_id; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label>Nama Pasien</label>
                             <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" value="<?= $edit->nama ?>" readonly>
                         </div>
                         <div class="form-group">
-                            <label>Alamat</label>
-                            <textarea class="form-control" name="alamat" rows="3" readonly><?= $edit->alamat ?></textarea>
+                            <label>Alamat Domisili</label>
+                            <textarea class="form-control" name="alamat" rows="3"><?= $edit->alamat ?></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Tanggal Lahir</label>
-                            <input type="date" name="tgl_lahir" class="form-control" placeholder="Tanggal lahir" value="<?= $edit->tgl_lahir ?>" readonly>
+                            <label>Umur</label>
+                            <input type="number" name="umur" class="form-control" placeholder="Umur" value="<?= $edit->umur ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label>Dokter</label>

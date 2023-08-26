@@ -31,6 +31,8 @@ class Dokter extends CI_Controller
         $post = $this->input->post(NULL, TRUE);
 
         $nama           = $post['nama'];
+        $noinduk           = $post['noinduk'];
+        $haripraktek           = $post['haripraktek'];
         $shift          = $post['shift'];
         $terdaftar      = date('Y-m-d H:i:s');
 
@@ -39,7 +41,9 @@ class Dokter extends CI_Controller
             'created_by'    => $this->session->userdata('id'),
             'updated'       => date('Y-m-d H:i:s'),
             'updated_by'    => $this->session->userdata('id'),
+            'noinduk'          => $noinduk,
             'nama'          => $nama,
+            'haripraktek'          => $haripraktek,
             'shift'         => $shift,
             'terdaftar'     => $terdaftar
         ];
@@ -53,12 +57,16 @@ class Dokter extends CI_Controller
     {
         $post = $this->input->post(NULL, TRUE);
 
+        $noinduk           = $post['noinduk'];
         $nama           = $post['nama'];
+        $haripraktek           = $post['haripraktek'];
         $shift          = $post['shift'];
 
         $data = [
             'updated'       => date('Y-m-d H:i:s'),
             'updated_by'    => $this->session->userdata('id'),
+            'noinduk'          => $noinduk,
+            'haripraktek'          => $haripraktek,
             'nama'          => $nama,
             'shift'         => $shift
         ];

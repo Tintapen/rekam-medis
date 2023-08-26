@@ -71,3 +71,9 @@ $route['reg_pasien'] = 'admin/RegPasien';
 $route['reg_pasien/insert'] = 'admin/RegPasien/insert';
 $route['reg_pasien/update/(:num)'] = 'admin/RegPasien/update/$1';
 $route['reg_pasien/delete/(:num)'] = 'admin/RegPasien/delete/$1';
+
+$route['soap'] = 'admin/Soap';
+$route['soap/insert'] = 'admin/Soap/insert';
+
+$route['laporan'] = 'admin/Laporan';
+$route['laporan/cetak'] = 'admin/Laporan/cetak';
