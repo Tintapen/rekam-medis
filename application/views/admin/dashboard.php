@@ -23,7 +23,7 @@
     foreach ($sqldok->result() as $dokter) {
     }
     //menghitung jumlah data SOAP
-    $sqlsoap = $this->db->query('select COUNT(tb_soap_id) as jml from tb_soap');
+    $sqlsoap = $this->db->query('select COUNT(tb_soap_id) as jml from tb_soap WHERE tb_dokter_id ="' . $this->session->userdata('ref_dokter_id') . '"');
     foreach ($sqlsoap->result() as $soap) {
     }
 

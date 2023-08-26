@@ -48,7 +48,8 @@ class Home extends CI_Controller
                         'username'      => $row['username'],
                         'skin'          => $row['skin'],
                         'level'         => $row['level'],
-                        'foto'          => $row['foto']
+                        'foto'          => $row['foto'],
+                        'ref_dokter_id' => $row['ref']
                     );
 
                     $this->session->set_userdata($datauser);

@@ -18,7 +18,9 @@ class Soap extends CI_Controller
     $data['subtitle']   = 'Semua data SOAP pasien akan ditampikan disini';
 
     $this->db->order_by('tb_reg_pasien_id', 'ASC');
-    $data['reg_pasien'] = $this->m_model->get_desc('tb_reg_pasien');
+    $data['reg_pasien'] = $this->m_model->get_where([
+      'tb_dokter_id' =>  $this->session->userdata('id')
+    ], 'tb_reg_pasien');
     $this->db->order_by('tb_pasien_id', 'ASC');
     $data['pasien'] = $this->m_model->get_desc('tb_pasien')->result();
     $this->db->order_by('nama', 'ASC');

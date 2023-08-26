@@ -110,7 +110,19 @@
                             <label>Resep</label>
                             <textarea class="form-control" name="Resep" rows="3"></textarea>
                         </div>
-
+                        <div class="form-group">
+                            <label>Dokter</label>
+                            <select class="form-control select2" name="dokter" style="width: 100%;" disabled required>
+                                <option value="">Select Status</option>
+                                <?php foreach ($dokter as $val) : ?>
+                                    <?php if ($edit->tb_dokter_id == $val->tb_dokter_id) : ?>
+                                        <option value="<?= $val->tb_dokter_id ?>" selected><?= $val->nama ?></option>
+                                    <?php else : ?>
+                                        <option value="<?= $val->tb_dokter_id ?>"><?= $val->nama ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
