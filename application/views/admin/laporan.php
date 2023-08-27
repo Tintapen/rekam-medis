@@ -15,7 +15,7 @@
         Buat Laporan Rekam Medis
       </div>
       <div class="box-body">
-        <form action="<?= site_url('laporan/cetak') ?>" method="POST">
+        <form action="<?= site_url('laporan/cetak') ?>" method="GET" target="_blank">
           <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>" value="<?= $this->security->get_csrf_hash(); ?>" style="display: none">
           <div class="modal-body">
             <div class="form-group">
